@@ -14,6 +14,21 @@ pipeline {
             }
         }
         
+        stage('Clone-code') {
+            steps {
+                echo '<---------Cloning code--------->'
+                git branch: 'main', url: 'https://github.com/kedarnathpc/gohtmx.git'
+                echo '<---------Code cloned--------->'
+        }
+        
+        stage('Install Dependencies') {
+            steps {
+                echo '<---------Installing dependencies--------->'
+                sh 'go mod download'
+                echo '<---------Dependencies installed--------->'
+            }
+        }
+
         stage('Build') {
             steps {
                 echo '<---------Building code--------->'
