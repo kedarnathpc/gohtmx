@@ -1,4 +1,6 @@
 def registry = 'https://miniproject3.jfrog.io'
+def imageName = 'miniproject3.jfrog.io/miniproject3-docker-local/gohtmx'
+def version = '1.0.0'
 
 pipeline {
     agent {
@@ -86,6 +88,28 @@ pipeline {
                     server.publishBuildInfo(buildInfo)
 
                     echo '<--------------- GoLang Publish Ended --------------->'
+                }
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                script {
+                    echo '<---------Building Docker Image--------->'
+                    app = docker.build(imageName + ':' + version)
+                    echo '<---------Docker Image Built--------->'
+                }
+            }
+        }
+
+        stage('Docker Publish'){
+            steps {
+                script {
+                    echo '<---------Publishing Docker Image--------->'
+                    docker.withRegistry(registry, 'artifact-cred') {
+                        app.push()
+                    }
+                    echo '<---------Docker Image Published--------->'
                 }
             }
         }
