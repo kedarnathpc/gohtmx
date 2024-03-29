@@ -1,4 +1,4 @@
-def registry = "https://miniproject3.jfrog.io"
+def registry = 'https://miniproject3.jfrog.io'
 
 pipeline {
     agent {
@@ -60,26 +60,32 @@ pipeline {
             }
         }
         
-        stage('Push to Artifactory') {
+
+        stage("Publish to Artifactory") {
             steps {
                 script {
-                    def server = Artifactory.server url: "https://miniproject3.jfrog.io/artifactory", credentialsId: "artifact-cred"
-                    def buildInfo = Artifactory.newBuildInfo()
+                    echo '<--------------- GoLang Publish Started --------------->'
 
+                    def server = Artifactory.newServer url: registry + "/artifactory", credentialsId: "artifact-cred"
                     def filePath = "/home/ubuntu/jenkins/workspace/test2_main/gohtmx"
                     def artifactLocation = "gohtmx"
                     def repositoryPath = "miniproject-go-local/"
 
-                    server.upload spec: [
-                        // Specifying the file path(s) and destination directory in Artifactory
-                        // The syntax is { source: destination }
-                        // For multiple files, you can specify them individually or use a wildcard pattern
-                        // Example: '/path/to/source/file.txt': 'repo-name/path/in/artifactory/file.txt'
-                        // Wildcard example: '/path/to/source/*.txt': 'repo-name/path/in/artifactory/'
-                        (filePath): repositoryPath + artifactLocation
-                    ], buildInfo: buildInfo, failNoOp: true, recursive: true, flat: false
+                    def properties = "buildid=${env.BUILD_ID},commitid=${GIT_COMMIT}"
+                    def uploadSpec = """{
+                        "files": [
+                            {
+                                "pattern": "${filePath}",
+                                "target": "${repositoryPath}/${artifactLocation}",
+                                "props": "${properties}"
+                            }
+                        ]
+                    }"""
 
-                    server.publishBuildInfo buildInfo
+                    def buildInfo = server.upload(uploadSpec)
+                    server.publishBuildInfo(buildInfo)
+
+                    echo '<--------------- GoLang Publish Ended --------------->'
                 }
             }
         }
