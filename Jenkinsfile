@@ -63,7 +63,7 @@ pipeline {
         stage('Push to Artifactory') {
             steps {
                 script {
-                    def server = Artifactory.server url: registry+"/artifactory", credentialsId: "artifact-cred"
+                    def server = Artifactory.server url: "https://miniproject3.jfrog.io/artifactory", credentialsId: "artifact-cred"
                     def buildInfo = Artifactory.newBuildInfo()
 
                     def filePath = "/home/ubuntu/jenkins/workspace/test2_main/gohtmx"
