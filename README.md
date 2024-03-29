@@ -1,6 +1,6 @@
 # GoHTMX
 
-Short description of your project.
+Demo project
 
 ## Table of Contents
 
