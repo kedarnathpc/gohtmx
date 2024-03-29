@@ -1,3 +1,5 @@
+def registry = "https://miniproject3.jfrog.io"
+
 pipeline {
     agent {
         node {
@@ -54,6 +56,25 @@ pipeline {
             steps {
                 withSonarQubeEnv('miniproject-sonarqube-server') {
                     sh "${scannerHome}/bin/sonar-scanner"
+                }
+            }
+        }
+        
+        stage('Push to Artifactory') {
+            steps {
+                script {
+                    def server = Artifactory.server url: registry+"/artifactory", credentialsId: "artifact-cred"
+                    def buildInfo = Artifactory.newBuildInfo()
+
+                    def filePath = "/home/ubuntu/jenkins/workspace/test2_main/gohtmx"
+                    def artifactLocation = "gohtmx"
+                    def repositoryPath = "miniproject-go-local"
+
+                    server.upload spec: {
+                        '/home/ubuntu/jenkins/workspace/test2_main/gohtmx': repositoryPath + artifactLocation
+                    }, buildInfo: buildInfo, failNoOp: true, recursive: true, flat: false
+
+                    server.publishBuildInfo buildInfo
                 }
             }
         }
