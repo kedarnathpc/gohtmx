@@ -70,15 +70,14 @@ pipeline {
                     def artifactLocation = "gohtmx"
                     def repositoryPath = "miniproject-go-local/"
 
-                    server.upload(
-                        spec: {
-                            '/home/ubuntu/jenkins/workspace/test2_main/gohtmx': repositoryPath + artifactLocation
-                        },
-                        buildInfo: buildInfo,
-                        failNoOp: true,
-                        recursive: true,
-                        flat: false
-                    )
+                    server.upload spec: [
+                        // Specifying the file path(s) and destination directory in Artifactory
+                        // The syntax is { source: destination }
+                        // For multiple files, you can specify them individually or use a wildcard pattern
+                        // Example: '/path/to/source/file.txt': 'repo-name/path/in/artifactory/file.txt'
+                        // Wildcard example: '/path/to/source/*.txt': 'repo-name/path/in/artifactory/'
+                        (filePath): repositoryPath + artifactLocation
+                    ], buildInfo: buildInfo, failNoOp: true, recursive: true, flat: false
 
                     server.publishBuildInfo buildInfo
                 }
