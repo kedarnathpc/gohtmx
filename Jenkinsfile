@@ -19,7 +19,8 @@ pipeline {
                 echo '<---------Cloning code--------->'
                 git branch: 'main', url: 'https://github.com/kedarnathpc/gohtmx.git'
                 echo '<---------Code cloned--------->'
-        }
+            }
+        } 
         
         stage('Install Dependencies') {
             steps {
