@@ -68,11 +68,17 @@ pipeline {
 
                     def filePath = "/home/ubuntu/jenkins/workspace/test2_main/gohtmx"
                     def artifactLocation = "gohtmx"
-                    def repositoryPath = "miniproject-go-local"
+                    def repositoryPath = "miniproject-go-local/"
 
-                    server.upload spec: {
-                        '/home/ubuntu/jenkins/workspace/test2_main/gohtmx': repositoryPath + artifactLocation
-                    }, buildInfo: buildInfo, failNoOp: true, recursive: true, flat: false
+                    server.upload(
+                        spec: {
+                            '/home/ubuntu/jenkins/workspace/test2_main/gohtmx': repositoryPath + artifactLocation
+                        },
+                        buildInfo: buildInfo,
+                        failNoOp: true,
+                        recursive: true,
+                        flat: false
+                    )
 
                     server.publishBuildInfo buildInfo
                 }
