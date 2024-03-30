@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: miniproject-rtp
+  namespace: miniproject
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app:  miniproject-rtp
+  template:
+    metadata:
+      labels:
+        app:  miniproject-rtp
+    spec:
+      imagePullSecrets:
+      - name: jfrogcred
+      containers:
+      - name:  miniproject-rtp
+        image: miniproject3.jfrog.io/miniproject3-docker-local/gohtmx:1.0.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
