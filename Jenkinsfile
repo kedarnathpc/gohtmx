@@ -113,5 +113,24 @@ pipeline {
                 }
             }
         }
+
+        stage ('Delete Previous Deployment') {
+            steps {
+                script {
+                    echo '<---------Deleting previous deployment--------->'
+                    sh './delete-deploy.sh'
+                    echo '<---------Previous deployment deleted--------->'
+                }
+            }
+        }
+        stage ('New Deploy') {
+            steps {
+                script {
+                    echo '<---------Deploying application--------->'
+                    sh './deploy.sh'
+                    echo '<---------Application deployed--------->'
+                }
+            }
+        }
     }
 }
