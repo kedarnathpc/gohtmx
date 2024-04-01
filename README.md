@@ -1,6 +1,6 @@
 # GoHTMX
 
-Demo project for DevOps
+Demo project for DevOps miniproject
 
 ## Table of Contents
 
