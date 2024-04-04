@@ -92,6 +92,16 @@ pipeline {
             }
         }
 
+        stage('Give Docker Permissions'){
+            steps {
+                script {
+                    echo '<---------Giving Docker Permissions--------->'
+                    sh 'sudo chmod 0777 /var/run/docker.sock'
+                    echo '<---------Docker Permissions Given--------->'
+                }
+            }
+        }
+        
         stage('Docker Build') {
             steps {
                 script {
@@ -114,15 +124,15 @@ pipeline {
             }
         }
 
-        stage ('Delete Previous Deployment') {
-            steps {
-                script {
-                    echo '<---------Deleting previous deployment--------->'
-                    sh './delete-deploy.sh'
-                    echo '<---------Previous deployment deleted--------->'
-                }
-            }
-        }
+        // stage ('Delete Previous Deployment') {
+        //     steps {
+        //         script {
+        //             echo '<---------Deleting previous deployment--------->'
+        //             sh './delete-deploy.sh'
+        //             echo '<---------Previous deployment deleted--------->'
+        //         }
+        //     }
+        // }
         stage ('New Deploy') {
             steps {
                 script {
