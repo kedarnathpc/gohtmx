@@ -2,12 +2,6 @@
 
 Demo project for DevOps miniproject
 
-## Table of Contents
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-
 ## Installation
 
 1. Clone the repository.
