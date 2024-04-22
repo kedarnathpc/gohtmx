@@ -23,7 +23,6 @@ func main() {
 			"Films": {
 				{Title: "The Godfather", Director: "Francis Ford Coppola"},
 				{Title: "Blade Runner", Director: "Ridley Scott"},
-				{Title: "The Thing", Director: "John Carpenter"},
 			},
 		}
 		tmpl.Execute(w, films)
