@@ -1,5 +1,5 @@
-def registry = 'https://miniproject3.jfrog.io'
-def imageName = 'miniproject3.jfrog.io/miniproject3-docker-local/gohtmx'
+def registry = 'https://miniproject.jfrog.io'
+def imageName = 'miniproject.jfrog.io/miniproject-docker-local/gohtmx'
 def version = '1.0.0'
 
 pipeline {
@@ -69,7 +69,7 @@ pipeline {
                     echo '<--------------- GoLang Publish Started --------------->'
 
                     def server = Artifactory.newServer url: registry + "/artifactory", credentialsId: "artifact-cred"
-                    def filePath = "/home/ubuntu/jenkins/workspace/test2_main/gohtmx"
+                    def filePath = "/home/ubuntu/jenkins/workspace/movie-app/gohtmx"
                     def artifactLocation = "gohtmx"
                     def repositoryPath = "miniproject-go-local/"
 
@@ -124,6 +124,17 @@ pipeline {
             }
         }
 
+        stage('Deploy Docker image') {
+            steps {
+                script {
+                    echo '<---------Deploying Docker Image--------->'
+                    sh 'docker run -p 8080:8080 -d miniproject.jfrog.io/miniproject-docker-local/gohtmx:1.0.0'
+                    echo '<---------Docker Image Deployed--------->'
+                
+                }
+            }
+        }
+
         // stage ('Delete Previous Deployment') {
         //     steps {
         //         script {
@@ -133,14 +144,15 @@ pipeline {
         //         }
         //     }
         // }
-        stage ('New Deploy') {
-            steps {
-                script {
-                    echo '<---------Deploying application--------->'
-                    sh './deploy.sh'
-                    echo '<---------Application deployed--------->'
-                }
-            }
-        }
+
+        // stage ('New Deploy') {
+        //     steps {
+        //         script {
+        //             echo '<---------Deploying application--------->'
+        //             sh './deploy.sh'
+        //             echo '<---------Application deployed--------->'
+        //         }
+        //     }
+        // }
     }
 }
