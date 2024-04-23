@@ -92,6 +92,16 @@ pipeline {
             }
         }
 
+        stage ('Remove existing containers') {
+            steps {
+                script {
+                    echo '<---------Removing existing containers--------->'
+                    sh 'docker rm -f $(docker ps -a)'
+                    echo '<---------Existing containers removed--------->'
+                }
+            }
+        }
+
         stage('Give Docker Permissions'){
             steps {
                 script {
