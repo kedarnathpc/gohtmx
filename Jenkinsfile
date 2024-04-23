@@ -50,17 +50,17 @@ pipeline {
             }
         }
 
-        stage('SonarQube analysis') {
-            environment {
-                scannerHome = tool 'miniproject-sonar-scanner'
-            }
+        // stage('SonarQube analysis') {
+        //     environment {
+        //         scannerHome = tool 'miniproject-sonar-scanner'
+        //     }
 
-            steps {
-                withSonarQubeEnv('miniproject-sonarqube-server') {
-                    sh "${scannerHome}/bin/sonar-scanner"
-                }
-            }
-        }
+        //     steps {
+        //         withSonarQubeEnv('miniproject-sonarqube-server') {
+        //             sh "${scannerHome}/bin/sonar-scanner"
+        //         }
+        //     }
+        // }
         
 
         stage("Publish to Artifactory") {
@@ -92,16 +92,6 @@ pipeline {
             }
         }
 
-        stage ('Remove existing containers') {
-            steps {
-                script {
-                    echo '<---------Removing existing containers--------->'
-                    sh 'docker rm -f $(docker ps -a)'
-                    echo '<---------Existing containers removed--------->'
-                }
-            }
-        }
-
         stage('Give Docker Permissions'){
             steps {
                 script {
@@ -111,7 +101,17 @@ pipeline {
                 }
             }
         }
-        
+
+        // stage ('Remove existing containers') {
+        //     steps {
+        //         script {
+        //             echo '<---------Removing existing containers--------->'
+        //             sh 'docker rm -f $(docker ps -a)'
+        //             echo '<---------Existing containers removed--------->'
+        //         }
+        //     }
+        // }
+
         stage('Docker Build') {
             steps {
                 script {
