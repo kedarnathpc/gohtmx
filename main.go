@@ -22,8 +22,6 @@ func main() {
 		films := map[string][]Film{
 			"Films": {
 				{Title: "The Godfather", Director: "Francis Ford Coppola"},
-				{Title: "Blade Runner", Director: "Ridley Scott"},
-				{Title: "Openheimer", Director: "Christopher Nolan"},
 			},
 		}
 		tmpl.Execute(w, films)
