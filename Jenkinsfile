@@ -50,17 +50,20 @@ pipeline {
             }
         }
 
-        // stage('SonarQube analysis') {
-        //     environment {
-        //         scannerHome = tool 'miniproject-sonar-scanner'
-        //     }
+        stage('SonarQube analysis') {
+            // environment {
+            //     scannerHome = tool 'miniproject-sonar-scanner'
+            // }
 
-        //     steps {
-        //         withSonarQubeEnv('miniproject-sonarqube-server') {
-        //             sh "${scannerHome}/bin/sonar-scanner"
-        //         }
-        //     }
-        // }
+            // steps {
+            //     withSonarQubeEnv('miniproject-sonarqube-server') {
+            //         sh "${scannerHome}/bin/sonar-scanner"
+            //     }
+            // }
+            steps {
+                sh 'ls'
+            }
+        }
         
 
         stage("Publish to Artifactory") {
