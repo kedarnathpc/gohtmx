@@ -25,7 +25,6 @@ func main() {
 				{Title: "The Shawshank Redemption", Director: "Frank Darabont"},
 				{Title: "The Dark Knight", Director: "Christopher Nolan"},
 				{Title: "Pulp Fiction", Director: "Quentin Tarantino"},
-				{Title: "Schindler's List", Director: "Steven Spielberg"},
 			},
 		}
 		tmpl.Execute(w, films)
