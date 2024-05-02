@@ -105,15 +105,15 @@ pipeline {
             }
         }
 
-        // stage ('Remove existing containers') {
-        //     steps {
-        //         script {
-        //             echo '<---------Removing existing containers--------->'
-        //             sh 'docker rm -f $(docker ps -a)'
-        //             echo '<---------Existing containers removed--------->'
-        //         }
-        //     }
-        // }
+        stage ('Remove existing containers') {
+            steps {
+                script {
+                    echo '<---------Removing existing containers--------->'
+                    sh 'sudo docker system prune -y'
+                    echo '<---------Existing containers removed--------->'
+                }
+            }
+        }
 
         stage('Docker Build') {
             steps {
