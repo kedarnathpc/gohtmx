@@ -1,6 +1,6 @@
 def registry = 'https://miniproject.jfrog.io'
 def imageName = 'miniproject.jfrog.io/miniproject-docker-local/gohtmx'
-def version = '1.0.0'
+def version = '1.0.1'
 
 pipeline {
     agent {
