@@ -29,7 +29,7 @@ func main() {
 		}
 		tmpl.Execute(w, films)
 	}
-
+// updated
 	h2 := func(w http.ResponseWriter, r *http.Request) {
 		time.Sleep(1 * time.Second)
 		title := r.PostFormValue("title")
