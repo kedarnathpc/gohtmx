@@ -1,6 +1,6 @@
 def registry = 'https://miniproject.jfrog.io'
 def imageName = 'miniproject.jfrog.io/miniproject-docker-local/gohtmx'
-def version = '1.0.1'
+def version = '1.0.0'
 
 pipeline {
     agent {
@@ -109,7 +109,7 @@ pipeline {
         //     steps {
         //         script {
         //             echo '<---------Removing existing containers--------->'
-        //             sh 'sudo docker system prune -y'
+        //             sh 'docker rm -f $(docker ps -qa)'
         //             echo '<---------Existing containers removed--------->'
         //         }
         //     }
