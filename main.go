@@ -30,7 +30,6 @@ func main() {
 		tmpl.Execute(w, films)
 	}
 
-	// handler function #2 - returns the template block with the newly added film, as an HTMX response
 	h2 := func(w http.ResponseWriter, r *http.Request) {
 		time.Sleep(1 * time.Second)
 		title := r.PostFormValue("title")
