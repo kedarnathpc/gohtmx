@@ -2,7 +2,6 @@
 
 Demo project for DevOps miniproject
 
-
 ## Installation
 
 1. Clone the repository.
